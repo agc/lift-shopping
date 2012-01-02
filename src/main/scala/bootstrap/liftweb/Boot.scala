@@ -31,7 +31,7 @@ class Boot {
     // Use Lift's Mapper ORM to populate the database
     // you don't need to use Mapper to use Lift... use
     // any ORM you want
-    Schemifier.schemify(true, Schemifier.infoF _, User)
+    Schemifier.schemify(true, Schemifier.infoF _, User, Item)
   
     // where to search snippet
     LiftRules.addToPackages("com.shopping")
@@ -39,7 +39,7 @@ class Boot {
     // build sitemap
     val entries = (List(Menu("Home") / "index") :::
                                     // the User management menu items
-                  User.sitemap :::
+                  User.sitemap   ::: Item.menus   :::
                   List(Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content"))) :::
                   Nil)
     
