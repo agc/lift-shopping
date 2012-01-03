@@ -1,7 +1,7 @@
 package bootstrap.liftweb
 
 import net.liftweb._
-import http.{LiftRules, NotFoundAsTemplate, ParsePath}
+import http.{LiftRules, NotFoundAsTemplate, ParsePath,RewriteRequest,RewriteResponse}
 import sitemap.{SiteMap, Menu, Loc}
 import util.{ NamedPF }
 import net.liftweb._
@@ -47,7 +47,14 @@ class Boot {
     val entries = Menu(Loc("Home", List("index"), "Home")) ::
                   Menu(Loc("ItemList", List("item", "list"), "Lista de items")) ::
                   Menu(Loc("ItemCreate", List("item", "create"), "Crear un Item")) ::
+                  Menu(Loc("Item", List("item") -> true, "Item", Hidden)) ::
                   User.sitemap ::: Item.menus
+
+    LiftRules.statelessRewrite.append {
+      case RewriteRequest(
+      ParsePath(List("item", "view", id),_,_,_),_,_) =>
+        RewriteResponse("item" :: "view" :: Nil, Map("id" -> id))
+    }
 
     LiftRules.uriNotFound.prepend(NamedPF("404handler"){
       case (req,failure) => NotFoundAsTemplate(

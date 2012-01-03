@@ -26,6 +26,7 @@ class Item extends LongKeyedMapper[Item] with IdPK {
 object Item extends Item with LongKeyedMetaMapper[Item]  with CRUDify[Long, Item]   {
   override def showAllMenuLoc = Empty
   override def createMenuLoc = Empty
+  override def viewMenuLoc = Empty
   override def fieldOrder = List(amount,name)
 
 }
