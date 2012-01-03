@@ -37,12 +37,17 @@ class Boot {
     LiftRules.addToPackages("com.shopping")
 
     // build sitemap
-    val entries = (List(Menu("Home") / "index") :::
-                                    // the User management menu items
-                  User.sitemap   ::: Item.menus   :::
-                  List(Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content"))) :::
-                  Nil)
-    
+//    val entries = (List(Menu("Home") / "index") :::
+//                                    // the User management menu items
+//                  User.sitemap   ::: Item.menus   :::
+//                  List(Menu(Loc("Static", Link(List("static"), true, "/static/index"), "Static Content"))) :::
+//                  Nil)
+
+
+    val entries = Menu(Loc("Home", List("index"), "Home")) ::
+                  Menu(Loc("ItemList", List("item", "list"), "Lista de items")) ::
+                  User.sitemap ::: Item.menus
+
     LiftRules.uriNotFound.prepend(NamedPF("404handler"){
       case (req,failure) => NotFoundAsTemplate(
         ParsePath(List("exceptions","404"),"html",false,false))

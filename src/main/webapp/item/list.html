@@ -1,0 +1,30 @@
+<lift:surround with="default" at="content">
+  <table>
+      <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Ver</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <lift:ListItem.list >
+              <tr>
+                  <td>
+                    <item:name />
+                  </td>
+                  <td>
+                    <item:amount />
+                  </td>
+                  <td><a item:view_href="">Ver</a></td>
+                  <td><a item:edit_href="">Editar</a></td>
+                  <td><a item:delete_href="">Borrar</a></td>
+              </tr>
+          </lift:ListItem.list>
+      </tbody>
+  </table>
+</lift:surround>
+
