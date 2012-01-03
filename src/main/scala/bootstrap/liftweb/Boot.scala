@@ -46,6 +46,7 @@ class Boot {
 
     val entries = Menu(Loc("Home", List("index"), "Home")) ::
                   Menu(Loc("ItemList", List("item", "list"), "Lista de items")) ::
+                  Menu(Loc("ItemCreate", List("item", "create"), "Crear un Item")) ::
                   User.sitemap ::: Item.menus
 
     LiftRules.uriNotFound.prepend(NamedPF("404handler"){

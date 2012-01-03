@@ -9,8 +9,15 @@ class Item extends LongKeyedMapper[Item] with IdPK {
 
     def getSingleton = Item
 
-    object name extends MappedPoliteString(this, 128)
-    object amount extends MappedInt(this)
+    object name extends MappedPoliteString(this, 128)     {
+      override def displayName = "Nombre"
+
+    }
+    object amount extends MappedInt(this) {
+      override def displayName = "Cantidad"
+
+
+    }
 
 
 
@@ -18,5 +25,7 @@ class Item extends LongKeyedMapper[Item] with IdPK {
 
 object Item extends Item with LongKeyedMetaMapper[Item]  with CRUDify[Long, Item]   {
   override def showAllMenuLoc = Empty
+  override def createMenuLoc = Empty
+  override def fieldOrder = List(amount,name)
 
 }
